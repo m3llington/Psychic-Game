@@ -15,6 +15,7 @@ function resetgame() {
     losses = 0 + losses;
     guesses = 0;
     guessesleft = 10;
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     //Creates a new blank array emptying out the list of letters used*
     userStore = [];
 }

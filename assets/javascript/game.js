@@ -1,5 +1,7 @@
 //Array to store potential computer guesses
 var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z"];
+//Array to store potential player guesses
+var userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z"];
 //Array to hold user guesses
 var userStore = [];
 //Multiple variables declared to keep count of results
@@ -23,42 +25,59 @@ function resetgame() {
 //when key is pressed
 document.onkeyup = function (event) {
 
-    var userGuess = event.key;
-    var directionsText = document.getElementById("directions-text");
-    var winsText = document.getElementById("wins-text");
-    var lossesText = document.getElementById("losses-text");
-    var guessCounter = document.getElementById("guess-counter");
-    var guessRemaining = document.getElementById("guess-remaining");
-    lettersGuessed = document.getElementById("letters-guessed");
-    userStore.push(userGuess);
+    for (let index = 0; index < userChoices.length; index++) { 
+        var userGuess = event.key;
+        console.log(computerGuess);
+        if (userGuess === userChoices[index]) {
 
-    if (userGuess === computerGuess) {
+            var directionsText = document.getElementById("directions-text");
+            var winsText = document.getElementById("wins-text");
+            var lossesText = document.getElementById("losses-text");
+            var guessCounter = document.getElementById("guess-counter");
+            var guessRemaining = document.getElementById("guess-remaining");
+            lettersGuessed = document.getElementById("letters-guessed");
+            userStore.push(userGuess);
         
-        lettersGuessed.textContent = "letters guessed so far: " + userStore
-        wins++;
-        resetgame();
-    }
-
-    else if (userGuess !== computerGuess) {
-
-        guesses++;
-        guessesleft--;
-        lettersGuessed.textContent = "letters guessed so far: " + userStore;
+            if (userGuess === computerGuess) {
         
-        if (guessesleft === 0) {
-            losses++;
-            resetgame();
-
+                lettersGuessed.textContent = "letters guessed so far: " + userStore
+                wins++;
+                resetgame();
+            }
+        
+            else if (userGuess !== computerGuess) {
+        
+                guesses++;
+                guessesleft--;
+                lettersGuessed.textContent = "letters guessed so far: " + userStore;
+                
+                if (guessesleft === 0) {
+                    losses++;
+                    resetgame();
+        
+                }
+        
+            }
+            //Reset game only happens if correct letter is guessed, or user fails to guess correctly before running out of guesses.
+        
+            //Makes text attatched to id dissapear when game starts
+            directionsText.textContent = "";
+            winsText.textContent = "wins: " + wins;
+            lossesText.textContent = "losses: " + losses;
+            guessCounter.textContent = "Guesses so far: " + guesses;
+            guessRemaining.textContent = "guesses remaining:  " + guessesleft;
+            lettersGuessed.textContent = "letters guessed so far: " + userStore;
+        };
+        
+        
+        
+        
         }
 
-    }
-    //Reset game only happens if correct letter is guessed, or user fails to guess correctly before running out of guesses.
 
-    //Makes text attatched to id dissapear when game starts
-    directionsText.textContent = "";
-    winsText.textContent = "wins: " + wins;
-    lossesText.textContent = "losses: " + losses;
-    guessCounter.textContent = "Guesses so far: " + guesses;
-    guessRemaining.textContent = "guesses remaining:  " + guessesleft;
-    lettersGuessed.textContent = "letters guessed so far: " + userStore;
-};
+
+
+   
+
+    };
+        
